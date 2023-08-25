@@ -20,6 +20,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/btc"
 	"github.com/trezor/blockbook/bchain/coins/btg"
 	"github.com/trezor/blockbook/bchain/coins/cpuchain"
+	"github.com/trezor/blockbook/bchain/coins/crown"
 	"github.com/trezor/blockbook/bchain/coins/dash"
 	"github.com/trezor/blockbook/bchain/coins/dcr"
 	"github.com/trezor/blockbook/bchain/coins/deeponion"
@@ -140,6 +141,7 @@ func init() {
 	BlockChainFactories["BNB Smart Chain Archive"] = bsc.NewBNBSmartChainRPC
 	BlockChainFactories["Polygon"] = polygon.NewPolygonRPC
 	BlockChainFactories["Polygon Archive"] = polygon.NewPolygonRPC
+	BlockChainFactories["Crown"] = crown.NewCrownRPC
 }
 
 // GetCoinNameFromConfig gets coin name and coin shortcut from config file
