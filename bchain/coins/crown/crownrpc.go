@@ -147,7 +147,7 @@ func (b *CrownRPC) GetBlockInfo(hash string) (*bchain.BlockInfo, error) {
 
 	res := btc.ResGetBlockInfo{}
 	req := CmdRequest{Method: "getblock"}
-	req.Params = []interface{}{hash, 1}
+	req.Params = []interface{}{hash, true}
 	err := b.Call(&req, &res)
 
 	if err != nil {
@@ -217,31 +217,7 @@ func (b *CrownRPC) GetBlockFull(hash string) (*bchain.Block, error) {
 }
 
 func (b *CrownRPC) GetTransactionForMempool(txid string) (*bchain.Tx, error) {
-	glog.V(1).Info("rpc: getrawtransaction nonverbose ", txid)
-
-	res := btc.ResGetRawTransactionNonverbose{}
-	req := CmdRequest{Method: "getrawtransaction"}
-	req.Params = []interface{}{txid, false}
-
-	err := b.Call(&req, &res)
-	if err != nil {
-		return nil, errors.Annotatef(err, "txid %v", txid)
-	}
-	if res.Error != nil {
-		if btc.IsMissingTx(res.Error) {
-			return nil, bchain.ErrTxNotFound
-		}
-		return nil, errors.Annotatef(res.Error, "txid %v", txid)
-	}
-	data, err := hex.DecodeString(res.Result)
-	if err != nil {
-		return nil, errors.Annotatef(err, "txid %v", txid)
-	}
-	tx, err := b.Parser.ParseTx(data)
-	if err != nil {
-		return nil, errors.Annotatef(err, "txid %v", txid)
-	}
-	return tx, nil
+	return b.GetTransaction(txid)
 }
 
 func (b *CrownRPC) GetTransaction(txid string) (*bchain.Tx, error) {
@@ -332,4 +308,8 @@ func (b *CrownRPC) Initialize() error {
 	glog.Info("rpc: block chain ", params.Name)
 
 	return nil
+}
+
+func (b *CrownRPC) GetMempoolEntry(txid string) (*bchain.MempoolEntry, error) {
+	return nil, errors.New("GetMempoolEntry: not implemented")
 }

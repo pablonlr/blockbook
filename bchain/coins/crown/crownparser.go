@@ -26,11 +26,13 @@ func init() {
 	MainNetParams.Net = MainnetMagic
 	MainNetParams.PubKeyHashAddrID = []byte{0x01, 0x75, 0x07}
 	MainNetParams.ScriptHashAddrID = []byte{0x01, 0x74, 0xF1}
+	MainNetParams.AddressMagicLen = 3
 
 	TestNetParams = chaincfg.TestNet3Params
 	TestNetParams.Net = TestnetMagic
 	TestNetParams.PubKeyHashAddrID = []byte{0x01, 0x7A, 0xCD, 0x67}
 	TestNetParams.ScriptHashAddrID = []byte{0x01, 0x7A, 0xCD, 0x51}
+	TestNetParams.AddressMagicLen = 4
 }
 
 // CrownParser handle
