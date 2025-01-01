@@ -1,7 +1,7 @@
 BIN_IMAGE = blockbook-build
 DEB_IMAGE = blockbook-build-deb
 PACKAGER = $(shell id -u):$(shell id -g)
-BASE_IMAGE = $$(awk -F= '$$1=="ID" { print $$2 ;}' /etc/os-release):$$(awk -F= '$$1=="VERSION_ID" { print $$2 ;}' /etc/os-release | tr -d '"')
+BASE_IMAGE = ubuntu:22.04
 NO_CACHE = false
 TCMALLOC = 
 PORTABLE = 0
