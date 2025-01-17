@@ -37,6 +37,10 @@ func NewCrownRPC(config json.RawMessage, pushHandler func(bchain.NotificationTyp
 	return s, nil
 }
 
+func (c *CrownRPC) InitializeMempool(addrDescForOutpoint bchain.AddrDescForOutpointFunc, onNewTxAddr bchain.OnNewTxAddrFunc, onNewTx bchain.OnNewTxFunc) error {
+	return nil
+}
+
 func (b *CrownRPC) GetBlock(hash string, height uint32) (*bchain.Block, error) {
 	var err error
 	if hash == "" && height > 0 {
